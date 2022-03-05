@@ -1,13 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSpring, animated } from 'react-spring'
 function Section(props) {
 
-    
+    const fadeIn = useSpring({ to: { opacity: 1, transform: 'translateY(0px)' }, from: { opacity: 0, transform: 'translateY(50px)' },delay: 500 })
     return (
         <Wrap bgImage={props.backgroundImg}>
             <ItemText>
-                <h1>{props.title}</h1>
-                <p>{props.description}</p>
+                <animated.div style={fadeIn}>
+                    <h1>{props.title}</h1>
+                    <p>{props.description}</p>
+                </animated.div>
             </ItemText>
             <Button>
                 <ButtonGroup>
@@ -39,7 +42,6 @@ const Wrap = styled.div`
 const ItemText = styled.div`
     padding-top: 15vh;
     text-align: center;
-
 `
 
 const ButtonGroup = styled.div`
@@ -63,6 +65,8 @@ const LeftButton = styled.div`
     font-size: 12px;
     cursor: pointer;
     margin: 8px;
+    animation-name: leftBtnFadeIn;
+    animation-duration:1s;
 `
 
 //繼承leftbutton
@@ -70,6 +74,7 @@ const RightButton = styled(LeftButton)`
     color: #000;
     opacity: 0.75;
     background-color: white;
+    animation-name: rightBtnFadeIn;
 ` 
 
 const DownArrow = styled.img`
